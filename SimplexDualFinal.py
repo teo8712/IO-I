@@ -119,8 +119,8 @@ def main():
         maximization(final_cols, final_rows)
 
     print ('\nLa conclusión del ejercicio, donde el valor óptimo para la función de Z')
-    print('Z=13015718181818')
-    print('X1 =0 X2 =0 X3 =13636363636364')
+    print('Z=130157.18181818')
+    print('X1 =0 X2 =0 X3 =1.3636363636364')
 
 def maximization(final_cols, final_rows):
     row_app = []
