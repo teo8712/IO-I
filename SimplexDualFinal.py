@@ -9,6 +9,7 @@ except ImportError:
     pandas_av = False
     pass
 
+#Arreglos donde se van a guardar las tablas
 product_names = []
 col_values = []
 z_equation = []
@@ -22,8 +23,8 @@ no_solution = """
         simplex luego de hacerse
             """
 
-
 def main():
+    
     global decimals
     global const_num, prod_nums
     prob_type = int(1)
@@ -32,6 +33,7 @@ def main():
     prod_nums = int(5)
     const_names = [x + str(i) for i in range(1, const_num + 1)]
 
+#Restricciones     
     prod_val = ("Hectareas")
     product_names.append(prod_val)
     prod_val = ("Fertilizante")
@@ -42,10 +44,11 @@ def main():
     product_names.append(prod_val)
     prod_val = ("Personal")
     product_names.append(prod_val)
-
+    
+    #Problema de tipo max
     if prob_type == 1:
-       
-           
+        
+        #Coeficioentes de los valores X
         val = float(Fraction(11757053))
         z_equation.append(0 - int(val))
     
@@ -60,6 +63,7 @@ def main():
         while len(z_equation) <= (const_num + prod_nums):
             z_equation.append(0)
 
+        #Coeficientes de todas las restricciones (5)
         val = float(Fraction(0))
         col_values.append(val)
         val = float(Fraction(0))
@@ -105,6 +109,7 @@ def main():
         equate_prod = float(Fraction(15))
         col_values.append(equate_prod)
 
+        #Organizacion de las tablas (DUAL)
         final_cols = stdz_rows(col_values)
         i = len(const_names) + 1
         while len(const_names) < len(final_cols[0]) - 1:
@@ -118,16 +123,19 @@ def main():
         decimals = int(0)
         maximization(final_cols, final_rows)
 
+    #Impresion de las soluciones        
     print ('\nLa conclusión del ejercicio, donde el valor óptimo para la función de Z')
     print('Z=130157.18181818')
     print('X1 =0 X2 =0 X3 =1.3636363636364')
 
+    #Logica de la maximización
 def maximization(final_cols, final_rows):
     row_app = []
     last_col = final_cols[-1]
     min_last_row = min(last_col)
     min_manager = 1
     print("Solución")
+    #Encontrar pivotes
     try:
         final_pd = pd.DataFrame(np.array(final_cols), columns=const_names, index=solutions)
         print(final_pd)
@@ -161,6 +169,7 @@ def maximization(final_cols, final_rows):
                 val = 10000000000
                 row_div_val.append(val)
             i += 1
+        #Restar y multiplicar pivotes
         min_div_val = min(row_div_val)
         index_min_div_val = row_div_val.index(min_div_val)
         pivot_element = pivot_row[index_min_div_val]
